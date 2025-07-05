@@ -76,6 +76,12 @@ h2 {
   display: block;
 }
 
+#home {
+  background-color: #ffffff;
+  padding: 80px 0;
+}
+
+
 /* Section backgrounds for contrast */
 #about {
   background-color: #ffffff;
