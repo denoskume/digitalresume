@@ -54,11 +54,6 @@ h2 {
   pointer-events: none;
 }
 
-/* Main content visibility */
-#main-content {
-  display: none;
-}
-
 /* Section visibility (default hidden, shown on click) */
 .content-section {
   display: none;
