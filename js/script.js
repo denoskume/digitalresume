@@ -23,14 +23,15 @@ window.addEventListener('load', () => {
       showSection('#about'); // Show default section
     });
   }, 5000);
-});
 
-// Handle navbar clicks
-document.querySelectorAll('a.nav-link').forEach(link => {
-  link.addEventListener('click', function (e) {
-    if (this.hash) {
-      e.preventDefault();
-      showSection(this.hash);
-    }
+  // Handle navbar clicks AFTER splash
+  document.querySelectorAll('a.nav-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId.startsWith('#')) {
+        e.preventDefault();
+        showSection(targetId);
+      }
+    });
   });
 });
