@@ -9,29 +9,30 @@ function showSection(id) {
   }
 }
 
-window.addEventListener('load', () => {
+function revealMainContent() {
   const splash = document.getElementById('splash-screen');
   const main = document.getElementById('main-content');
 
+  splash.style.display = 'none';
+  main.style.display = 'block';
+
+  const hash = window.location.hash;
+  if (hash && document.querySelector(hash)) {
+    showSection(hash);
+  } else {
+    showSection('#home');
+  }
+}
+
+window.addEventListener('load', () => {
+  const splash = document.getElementById('splash-screen');
+
+  // Fade out splash after 5 seconds
   setTimeout(() => {
     splash.classList.add('fade-out');
 
-    // Fallback in case transitionend doesn't fire
-    const revealMain = () => {
-      splash.style.display = 'none';
-      main.style.display = 'block';
-
-      // Show section based on URL hash or default to #home
-      const hash = window.location.hash;
-      if (hash && document.querySelector(hash)) {
-        showSection(hash);
-      } else {
-        showSection('#home');
-      }
-    };
-
-    splash.addEventListener('transitionend', revealMain);
-    setTimeout(revealMain, 1200); // Fallback if transitionend fails
+    // Fallback: always reveal main content after fade
+    setTimeout(revealMainContent, 1000);
   }, 5000);
 });
 
@@ -42,7 +43,7 @@ document.querySelectorAll('a.nav-link').forEach(link => {
     if (targetId.startsWith('#')) {
       e.preventDefault();
       showSection(targetId);
-      history.replaceState(null, '', targetId); // update URL without reloading
+      history.replaceState(null, '', targetId);
     }
   });
 });
