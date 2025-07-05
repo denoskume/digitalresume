@@ -54,7 +54,14 @@ h2 {
   pointer-events: none;
 }
 
-/* Section visibility (default hidden, shown on click) */
+/* Main content visibility */
+#main-content {
+  display: none;
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Section visibility */
 .content-section {
   display: none;
   padding: 60px 0;
@@ -62,27 +69,16 @@ h2 {
   color: #212529;
 }
 
-.content-section {
-  display: none;
-}
-
-#main-content {
-  display: none;
-  visibility: visible;
-  opacity: 1;
-}
-
 .content-section.active {
   display: block;
 }
 
+/* Section backgrounds */
 #home {
   background-color: #ffffff;
   padding: 80px 0;
 }
 
-
-/* Section backgrounds for contrast */
 #about {
   background-color: #ffffff;
 }
