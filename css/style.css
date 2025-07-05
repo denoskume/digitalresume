@@ -66,6 +66,12 @@ h2 {
   display: none;
 }
 
+#main-content {
+  display: none;
+  visibility: visible;
+  opacity: 1;
+}
+
 .content-section.active {
   display: block;
 }
