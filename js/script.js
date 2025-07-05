@@ -9,41 +9,46 @@ function showSection(id) {
   }
 }
 
-function revealMainContent() {
-  const splash = document.getElementById('splash-screen');
-  const main = document.getElementById('main-content');
-
-  splash.style.display = 'none';
-  main.style.display = 'block';
-
+window.addEventListener('DOMContentLoaded', () => {
+  // Show section based on URL hash or default to #home
   const hash = window.location.hash;
   if (hash && document.querySelector(hash)) {
     showSection(hash);
   } else {
     showSection('#home');
   }
-}
 
-window.addEventListener('load', () => {
-  const splash = document.getElementById('splash-screen');
-
-  // Fade out splash after 5 seconds
-  setTimeout(() => {
-    splash.classList.add('fade-out');
-
-    // Fallback: always reveal main content after fade
-    setTimeout(revealMainContent, 1000);
-  }, 5000);
-});
-
-// Handle navbar clicks
-document.querySelectorAll('a.nav-link').forEach(link => {
-  link.addEventListener('click', function (e) {
-    const targetId = this.getAttribute('href');
-    if (targetId.startsWith('#')) {
-      e.preventDefault();
-      showSection(targetId);
-      history.replaceState(null, '', targetId);
-    }
+  // Handle navbar clicks
+  document.querySelectorAll('a.nav-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId.startsWith('#')) {
+        e.preventDefault();
+        showSection(targetId);
+        history.replaceState(null, '', targetId);
+      }
+    });
   });
+
+  // Contact form validation
+  const form = document.querySelector('#contactForm');
+  if (form) {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      } else {
+        event.preventDefault();
+        alert('Message sent successfully!');
+        form.reset();
+      }
+      form.classList.add('was-validated');
+    });
+  }
+
+  // Dynamic year in footer
+  const yearSpan = document.getElementById('year');
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+  }
 });
