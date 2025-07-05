@@ -1,4 +1,4 @@
-// Show only one section at a time after splash
+// Show only one section at a time
 function showSection(id) {
   document.querySelectorAll('.content-section').forEach(section => {
     section.style.display = 'none';
